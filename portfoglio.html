@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yossiani Maytè Cachi - Web Developer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
+            color: #e0e0e0;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(15, 15, 15, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: #e0e0e0;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        nav a:hover {
+            color: #64ffda;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #64ffda;
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            background: url('/sfondo.png') center/cover no-repeat;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            /*nero con 80% opacità*/
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            padding: 0 2rem;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #64ffda, #00bcd4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero .subtitle {
+            font-size: 1.5rem;
+            color: #888;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .hero .location {
+            font-size: 1.1rem;
+            color: #64ffda;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #64ffda, #00bcd4);
+            color: #0f0f0f;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: fadeInUp 1s ease 0.6s both;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(100, 255, 218, 0.3);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            background: linear-gradient(135deg, #64ffda, #00bcd4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .profile-image {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: url('https://picsum.photos/300/300') center/cover;
+            margin: 0 auto;
+            box-shadow: 0 20px 40px rgba(100, 255, 218, 0.2);
+            border: 4px solid rgba(100, 255, 218, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .profile-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(100, 255, 218, 0.1), rgba(0, 188, 212, 0.1));
+        }
+
+        .about-text {
+            font-size: 1.2rem;
+            color: #ccc;
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .skill-tag {
+            padding: 8px 16px;
+            background: rgba(100, 255, 218, 0.1);
+            border: 1px solid rgba(100, 255, 218, 0.3);
+            border-radius: 25px;
+            color: #64ffda;
+            font-size: 0.9rem;
+        }
+
+        /* Projects Section */
+        .projects {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .project-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 2rem;
+            border: 1px solid rgba(100, 255, 218, 0.1);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(100, 255, 218, 0.5);
+        }
+
+        .project-card h3 {
+            color: #64ffda;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .project-card p {
+            color: #ccc;
+            margin-bottom: 1.5rem;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tech-tag {
+            padding: 4px 12px;
+            background: rgba(100, 255, 218, 0.2);
+            border-radius: 15px;
+            font-size: 0.8rem;
+            color: #64ffda;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .project-link {
+            padding: 8px 16px;
+            background: linear-gradient(135deg, #64ffda, #00bcd4);
+            color: #0f0f0f;
+            text-decoration: none;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: transform 0.3s ease;
+        }
+
+        .project-link:hover {
+            transform: scale(1.05);
+        }
+
+        /* Contact Section */
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .contact-info h3 {
+            color: #64ffda;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            color: #ccc;
+        }
+
+        .contact-item span {
+            margin-right: 1rem;
+            color: #64ffda;
+        }
+
+        .contact-form {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(100, 255, 218, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #64ffda;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(100, 255, 218, 0.2);
+            border-radius: 8px;
+            color: #e0e0e0;
+            font-size: 1rem;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #64ffda;
+            box-shadow: 0 0 10px rgba(100, 255, 218, 0.2);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #64ffda, #00bcd4);
+            color: #0f0f0f;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            background: #0f0f0f;
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid rgba(100, 255, 218, 0.1);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .social-links a {
+            color: #64ffda;
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .social-links a:hover {
+            transform: scale(1.2);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Floating Elements */
+        .floating-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .floating-element {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: rgba(100, 255, 218, 0.1);
+            border-radius: 50%;
+            animation: float 15s infinite linear;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 1;
+            }
+
+            90% {
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Experience Timeline */
+        .timeline {
+            margin: 3rem 0;
+            position: relative;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, #64ffda, #00bcd4);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin: 2rem 0;
+            width: 50%;
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+            text-align: right;
+            padding-right: 2rem;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+            text-align: left;
+            padding-left: 2rem;
+        }
+
+        .timeline-content {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 1px solid rgba(100, 255, 218, 0.2);
+            position: relative;
+        }
+
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 15px;
+            height: 15px;
+            background: #64ffda;
+            border-radius: 50%;
+            transform: translateY(-50%);
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content::before {
+            right: -2.5rem;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content::before {
+            left: -2.5rem;
+        }
+
+        .timeline-year {
+            color: #64ffda;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .timeline-title {
+            color: #e0e0e0;
+            font-size: 1.1rem;
+            margin: 0.5rem 0;
+        }
+
+        .timeline-desc {
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+        /* Stats Section */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid rgba(100, 255, 218, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(100, 255, 218, 0.5);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #64ffda;
+            display: block;
+        }
+
+        .stat-label {
+            color: #ccc;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Project Images */
+        .project-image {
+            width: 100%;
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(100, 255, 218, 0.2), rgba(0, 188, 212, 0.2));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .project-card:hover .project-image::before {
+            opacity: 1;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            background: rgba(0, 0, 0, 0.3);
+            margin: 4rem 0;
+            padding: 3rem 2rem;
+            border-radius: 20px;
+        }
+
+        .testimonial-slider {
+            display: flex;
+            overflow-x: auto;
+            gap: 2rem;
+            padding: 1rem 0;
+            scroll-snap-type: x mandatory;
+        }
+
+        .testimonial-card {
+            min-width: 300px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(100, 255, 218, 0.2);
+            scroll-snap-align: start;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            color: #ccc;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .testimonial-author {
+            color: #64ffda;
+            font-weight: 600;
+        }
+
+        .testimonial-role {
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        /* Interactive Elements */
+        .interactive-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -2;
+        }
+
+        .bg-circle {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(100, 255, 218, 0.1) 0%, transparent 70%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: 0.3;
+            }
+
+            50% {
+                transform: scale(1.2);
+                opacity: 0.1;
+            }
+        }
+
+        /* Code Animation */
+        .code-animation {
+            font-family: 'Courier New', monospace;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 1rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+            border-left: 4px solid #64ffda;
+            overflow: hidden;
+        }
+
+        .code-line {
+            color: #64ffda;
+            margin: 0.5rem 0;
+            opacity: 0;
+            animation: typewriter 0.5s ease forwards;
+        }
+
+        .code-line:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .code-line:nth-child(2) {
+            animation-delay: 0.5s;
+        }
+
+        .code-line:nth-child(3) {
+            animation-delay: 1s;
+        }
+
+        .code-line:nth-child(4) {
+            animation-delay: 1.5s;
+        }
+
+        @keyframes typewriter {
+            from {
+                width: 0;
+                opacity: 0;
+            }
+
+            to {
+                width: 100%;
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                gap: 1rem;
+                flex-wrap: wrap;
+                padding: 0 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .profile-image {
+                width: 200px;
+                height: 200px;
+                font-size: 4rem;
+            }
+
+            .contact-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            section {
+                padding: 4rem 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            nav ul {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Background Elements -->
+    <div class="floating-elements" id="floatingElements"></div>
+    <div class="interactive-bg" id="interactiveBg"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">Chi Sono</a></li>
+            <li><a href="#experience">Esperienza</a></li>
+            <li><a href="#projects">Progetti</a></li>
+            <li><a href="#contact">Contatti</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Yossiani Maytè Cachi</h1>
+            <p class="subtitle">Web Developer</p>
+            <p class="location">📍 Torino, Italia</p>
+            <a href="#about" class="cta-button">Scopri di più</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <h2>Chi Sono</h2>
+        <div class="about-content">
+            <div class="profile-image"></div>
+            <div class="about-text">
+                <p>Ciao! Sono Yossiani, una studentessa appassionata presso l'ITS di Torino, specializzata nello
+                    sviluppo web. La mia passione per la tecnologia mi spinge a creare esperienze digitali innovative e
+                    user-friendly.</p>
+
+                <p>Attualmente sto perfezionando le mie competenze attraverso progetti pratici e studi avanzati, con
+                    l'obiettivo di diventare una sviluppatrice full-stack completa. Amo trasformare idee creative in
+                    soluzioni web funzionali e moderne.</p>
+
+                <div class="code-animation">
+                    <div class="code-line">const developer = {</div>
+                    <div class="code-line">&nbsp;&nbsp;name: "Yossiani Maytè Cachi",</div>
+                    <div class="code-line">&nbsp;&nbsp;passion: "Web Development",</div>
+                    <div class="code-line">};</div>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <span class="stat-number">15+</span>
+                        <span class="stat-label">Progetti Completati</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">8</span>
+                        <span class="stat-label">Tecnologie Padroneggiate</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">2+</span>
+                        <span class="stat-label">Anni di Esperienza</span>
+                    </div>
+                </div>
+
+                <div class="skills">
+                    <span class="skill-tag">HTML5</span>
+                    <span class="skill-tag">CSS3</span>
+                    <span class="skill-tag">JavaScript</span>
+                    <span class="skill-tag">React</span>
+                    <span class="skill-tag">Node.js</span>
+                    <span class="skill-tag">PHP</span>
+                    <span class="skill-tag">MySQL</span>
+                    <span class="skill-tag">Git</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Timeline Section -->
+    <section id="experience">
+        <h2>Il Mio Percorso</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2023 - Presente</div>
+                    <div class="timeline-title">Studente ITS - Web Development</div>
+                    <div class="timeline-desc">Formazione intensiva in sviluppo web full-stack presso l'Istituto Tecnico
+                        Superiore di Torino, con focus su tecnologie moderne e metodologie agili.</div>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2024</div>
+                    <div class="timeline-title">Stage - Frontend Development</div>
+                    <div class="timeline-desc">Tirocinio formativo presso azienda locale, sviluppo di interfacce utente
+                        responsive e ottimizzazione delle performance web.</div>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2024 - Presente</div>
+                    <div class="timeline-title">Freelance Projects</div>
+                    <div class="timeline-desc">Progetti indipendenti per piccole aziende locali, creazione di siti web e
+                        applicazioni personalizzate.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Testimonials -->
+        <div class="testimonials">
+            <h3 style="text-align: center; color: #64ffda; margin-bottom: 2rem;">Cosa Dicono di Me</h3>
+            <div class="testimonial-slider">
+                <div class="testimonial-card">
+                    <div class="testimonial-text">"Yossiani ha dimostrato grande dedizione e creatività nel nostro
+                        progetto. Le sue competenze tecniche sono impressionanti per una studentessa."</div>
+                    <div class="testimonial-author">Marco Rossi</div>
+                    <div class="testimonial-role">CEO, TechStart Torino</div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-text">"Un'ottima collaborazione! Ha saputo interpretare perfettamente le
+                        nostre esigenze e trasformarle in una soluzione web elegante e funzionale."</div>
+                    <div class="testimonial-author">Laura Bianchi</div>
+                    <div class="testimonial-role">Marketing Manager, Digital Solutions</div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-text">"Professionale, puntuale e sempre disponibile. Il sito web che ha
+                        creato per noi ha aumentato significativamente le nostre conversioni."</div>
+                    <div class="testimonial-author">Giuseppe Ferrari</div>
+                    <div class="testimonial-role">Proprietario, Caffè Centrale</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <h2>I Miei Progetti</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="project-image"
+                    style="background-image: url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');">
+                </div>
+                <h3>EcoShop - E-commerce Sostenibile</h3>
+                <p>Piattaforma e-commerce dedicata a prodotti ecosostenibili con sistema di filtraggio avanzato,
+                    carrello dinamico e integrazione con API di pagamento. Design responsive e user experience
+                    ottimizzata.</p>
+                <div class="tech-stack">
+                    <span class="tech-tag">React</span>
+                    <span class="tech-tag">Node.js</span>
+                    <span class="tech-tag">MongoDB</span>
+                    <span class="tech-tag">Stripe API</span>
+                </div>
+                <div class="project-links">
+                    <a href="https://github.com/yossiani/ecoshop" class="project-link">GitHub</a>
+                    <a href="https://ecoshop-demo.netlify.app" class="project-link">Demo Live</a>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-image"
+                    style="background-image: url('https://images.unsplash.com/photo-1611224923853-80b023f02d71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');">
+                </div>
+                <h3>TaskMaster - App Gestione Progetti</h3>
+                <p>Applicazione web per la gestione di progetti e task con sistema di drag & drop, notifiche real-time e
+                    collaborazione in team. Interfaccia intuitiva e dashboard analytics.</p>
+                <div class="tech-stack">
+                    <span class="tech-tag">Vue.js</span>
+                    <span class="tech-tag">PHP</span>
+                    <span class="tech-tag">MySQL</span>
+                    <span class="tech-tag">Socket.io</span>
+                </div>
+                <div class="project-links">
+                    <a href="https://github.com/yossiani/taskmaster" class="project-link">GitHub</a>
+                    <a href="https://taskmaster-app.vercel.app" class="project-link">Demo Live</a>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-image"
+                    style="background-image: url('https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');">
+                </div>
+                <h3>WeatherApp - Previsioni Meteo</h3>
+                <p>App meteo moderna con geolocalizzazione, previsioni a 7 giorni, grafici interattivi e sistema di
+                    notifiche per allerte meteo. Design elegante e performance ottimizzate.</p>
+                <div class="tech-stack">
+                    <span class="tech-tag">JavaScript</span>
+                    <span class="tech-tag">Chart.js</span>
+                    <span class="tech-tag">OpenWeather API</span>
+                    <span class="tech-tag">PWA</span>
+                </div>
+                <div class="project-links">
+                    <a href="https://github.com/yossiani/weatherapp" class="project-link">GitHub</a>
+                    <a href="https://my-weather-app.netlify.app" class="project-link">Demo Live</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <h2>Contattami</h2>
+        <div class="contact-content">
+            <div class="contact-info">
+                <h3>Informazioni di Contatto</h3>
+                <div class="contact-item">
+                    <span>📧</span>
+                    <span>cyossiani20@gmail.com</span>
+                </div>
+                <div class="contact-item">
+                    <span>📱</span>
+                    <span>+39 351 947 6778</span>
+                </div>
+                <div class="contact-item">
+                    <span>💼</span>
+                    <span>LinkedIn: Yossiani Maytè Cachi</span>
+                </div>
+                <div class="contact-item">
+                    <span>📍</span>
+                    <span>Torino, Piemonte, Italia</span>
+                </div>
+                <div class="contact-item">
+                    <span>🎓</span>
+                    <span>Studentessa ITS</span>
+                </div>
+            </div>
+
+            <form class="contact-form" id="contactForm">
+                <div class="form-group">
+                    <label for="name">Nome *</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="subject">Oggetto</label>
+                    <input type="text" id="subject" name="subject">
+                </div>
+                <div class="form-group">
+                    <label for="message">Messaggio *</label>
+                    <textarea id="message" name="message" required
+                        placeholder="Scrivi qui il tuo messaggio..."></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Invia Messaggio</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="social-links">
+            <a href="mailto:cyossiani20@gmail.com">📧</a>
+            <a href="https://linkedin.com/in/yossiani-mayte-cachi">💼</a>
+            <a href="https://github.com/yossiani">💻</a>
+        </div>
+        <p>&copy; 2025 Yossiani Maytè Cachi. Tutti i diritti riservati.</p>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Form submission
+        document.getElementById('contactForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // Get form data
+            const formData = new FormData(this);
+            const name = formData.get('name');
+            const email = formData.get('email');
+            const subject = formData.get('subject');
+            const message = formData.get('message');
+
+            // Simple validation
+            if (!name || !email || !message) {
+                alert('Per favore, compila tutti i campi obbligatori.');
+                return;
+            }
+
+            // Create mailto link
+            const mailtoLink = `mailto:cyossiani20@gmail.com?subject=${encodeURIComponent(subject || 'Contatto dal Portfolio')}&body=${encodeURIComponent(`Nome: ${name}\nEmail: ${email}\n\nMessaggio:\n${message}`)}`;
+
+            // Open email client
+            window.location.href = mailtoLink;
+
+            // Show success message
+            alert('Grazie per il tuo messaggio! Il tuo client email si aprirà per completare l\'invio.');
+
+            // Reset form
+            this.reset();
+        });
+
+        // Add scroll effect to navigation
+        window.addEventListener('scroll', function () {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.style.background = 'rgba(15, 15, 15, 0.98)';
+            } else {
+                nav.style.background = 'rgba(15, 15, 15, 0.95)';
+            }
+        });
+
+        // Add animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function (entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe sections for animation
+        document.querySelectorAll('section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(30px)';
+            section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(section);
+        });
+    </script>
+</body>
+
+</html>
